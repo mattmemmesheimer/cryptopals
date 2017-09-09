@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using cryptopals.Lib;
+using cryptopals.Lib.Crypto.Xor;
 using cryptopals.Lib.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -33,6 +34,23 @@ namespace cryptopals.Test.Challenges
             var actual = new HexString(xord).ToString();
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Challenge3()
+        {
+            string input = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
+            var expectedKey = (byte)88;
+            var expectedString = "Cooking MC's like a pound of bacon";
+            var hexString = new HexString(input);
+            var decryptor = new SingleByteXorCracker(new BigramCalculator());
+
+            var actualKey = decryptor.CrackKey(hexString);
+            var decryptedBytes = XorUtil.Xor(hexString.Bytes.ToArray(), new[] { actualKey });
+            var actualString = System.Text.Encoding.ASCII.GetString(decryptedBytes);
+
+            Assert.AreEqual(expectedKey, actualKey);
+            Assert.AreEqual(expectedString, actualString);
         }
     }
 }
