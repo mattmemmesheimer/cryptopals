@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using cryptopals.Lib;
 using cryptopals.Lib.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -17,6 +18,19 @@ namespace cryptopals.Test.Challenges
 
             var bytes = hexString.Bytes.ToArray();
             var actual = Convert.ToBase64String(bytes);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Challenge2()
+        {
+            var a = new HexString("1c0111001f010100061a024b53535009181c");
+            var b = new HexString("686974207468652062756c6c277320657965");
+            var expected = "746865206b696420646f6e277420706c6179";
+
+            var xord = XorUtil.Xor(a.Bytes.ToArray(), b.Bytes.ToArray());
+            var actual = new HexString(xord).ToString();
 
             Assert.AreEqual(expected, actual);
         }
