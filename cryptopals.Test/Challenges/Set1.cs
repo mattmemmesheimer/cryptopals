@@ -75,5 +75,24 @@ namespace cryptopals.Test.Challenges
             Assert.AreEqual(expectedString, actualString);
             Assert.AreEqual(expectedKey, actualKey);
         }
+
+        [TestMethod]
+        public void Challenge5()
+        {
+            var input =
+                "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal";
+            var key = "ICE";
+            var expected =
+                "0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f";
+            var inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            var keyBytes = System.Text.Encoding.ASCII.GetBytes(key);
+            var expectedHexString = new HexString(expected);
+
+            var actualBytes = XorUtil.Xor(inputBytes, keyBytes);
+            var actualHexString = new HexString(actualBytes);
+
+            CollectionAssert.AreEqual(expectedHexString.Bytes.ToArray(), actualBytes);
+            Assert.AreEqual(expectedHexString.ToString(), actualHexString.ToString());
+        }
     }
 }
