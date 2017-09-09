@@ -52,5 +52,28 @@ namespace cryptopals.Test.Challenges
             Assert.AreEqual(expectedKey, actualKey);
             Assert.AreEqual(expectedString, actualString);
         }
+
+        [TestMethod]
+        public void Challenge4()
+        {
+            var expectedString = "Now that the party is jumping\n";
+            var expectedKey = 53;
+            var strings = Set1Data.Challenge4Input.Split(new[]
+            {
+                '\n', '\r'
+            }, StringSplitOptions.RemoveEmptyEntries);
+
+            var hexStrings = strings.Select(s => new HexString(s)).ToArray();
+            ITextScoreCalculator textScoreCalculator = new BigramCalculator();
+            var cracker = new SingleByteXorCracker(textScoreCalculator);
+            int index;
+            var actualKey = cracker.CrackKey(hexStrings, out index);
+
+            var decrytedBytes = XorUtil.Xor(hexStrings[index].Bytes.ToArray(), new[] { actualKey });
+            var actualString = System.Text.Encoding.ASCII.GetString(decrytedBytes);
+
+            Assert.AreEqual(expectedString, actualString);
+            Assert.AreEqual(expectedKey, actualKey);
+        }
     }
 }
