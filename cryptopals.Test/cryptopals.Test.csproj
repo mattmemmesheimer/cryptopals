@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Challenges\Set1.cs" />
     <Compile Include="Challenges\Set2.cs" />
+    <Compile Include="Crypto\Aes\AesCbcTest.cs" />
     <Compile Include="Crypto\PaddingUtilTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Set1Data.cs" />
