@@ -49,7 +49,7 @@ namespace cryptopals.Lib.Crypto.Aes
             return new RijndaelManaged
             {
                 Mode = CipherMode.ECB,
-                Padding = PaddingMode.PKCS7
+                Padding = PaddingMode.None
             };
         }
 
