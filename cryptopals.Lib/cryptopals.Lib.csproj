@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crypto\Aes\AesEcb.cs" />
+    <Compile Include="Crypto\PaddingUtil.cs" />
     <Compile Include="Crypto\Xor\MultiByteXorCracker.cs" />
     <Compile Include="Crypto\Xor\SingleByteXorCracker.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using cryptopals.Lib;
+using cryptopals.Lib.Crypto;
+using cryptopals.Lib.Crypto.Aes;
 using cryptopals.Lib.Crypto.Xor;
 using cryptopals.Lib.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -111,6 +113,20 @@ namespace cryptopals.Test.Challenges
 
             Assert.AreEqual(expectedString, actualString);
             Assert.AreEqual(expectedKey, actualKey);
+        }
+
+        [TestMethod]
+        public void Challenge7()
+        {
+            var keyStr = "YELLOW SUBMARINE";
+            var key = System.Text.Encoding.ASCII.GetBytes(keyStr);
+            var data = Convert.FromBase64String(Set1Data.Challenge7Input);
+
+            var decrypted = AesEcb.Decrypt(data, key);
+            decrypted = PaddingUtil.RemovePad(decrypted);
+            var clearText = System.Text.Encoding.ASCII.GetString(decrypted);
+
+            Assert.AreEqual(Set1Data.Challenge7Solution, clearText);
         }
     }
 }
