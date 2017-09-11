@@ -123,7 +123,7 @@ namespace cryptopals.Test.Challenges
             var key = System.Text.Encoding.ASCII.GetBytes(keyStr);
             var data = Convert.FromBase64String(Set1Data.Challenge7Input);
 
-            var decrypted = AesEcb.Decrypt(data, key);
+            var decrypted = AesEcb.Decrypt(key, data);
             decrypted = PaddingUtil.RemovePad(decrypted);
             var clearText = System.Text.Encoding.ASCII.GetString(decrypted);
 

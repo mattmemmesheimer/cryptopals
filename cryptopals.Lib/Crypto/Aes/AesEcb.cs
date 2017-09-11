@@ -8,7 +8,7 @@ namespace cryptopals.Lib.Crypto.Aes
 {
     public static class AesEcb
     {
-        public static byte[] Encrypt(byte[] data, byte[] key)
+        public static byte[] Encrypt(byte[] key, byte[] data)
         {
             using (var alg = CreateAlgorithm())
             {
@@ -18,7 +18,7 @@ namespace cryptopals.Lib.Crypto.Aes
             }
         }
 
-        public static byte[] Decrypt(byte[] data, byte[] key)
+        public static byte[] Decrypt(byte[] key, byte[] data)
         {
             using (var alg = CreateAlgorithm())
             {
