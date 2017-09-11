@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using cryptopals.Lib;
 using cryptopals.Lib.Crypto;
@@ -144,6 +145,20 @@ namespace cryptopals.Test.Challenges
                 }
             }
             Assert.AreEqual(Set1Data.Challenge8Solution, index);
+        }
+        [TestMethod]
+        public void TestChallenge9()
+        {
+            int blockSize = 20;
+            var input = "YELLOW SUBMARINE";
+            var inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            var padding = new byte[] { 0x04, 0x04, 0x04, 0x04 };
+            var expected = new List<byte>(inputBytes);
+            expected.AddRange(padding);
+
+            var actual = PaddingUtil.Pad(inputBytes, blockSize);
+
+            CollectionAssert.AreEqual(expected, actual);
         }
     }
 }
