@@ -94,5 +94,23 @@ namespace cryptopals.Test.Challenges
             CollectionAssert.AreEqual(expectedHexString.Bytes.ToArray(), actualBytes);
             Assert.AreEqual(expectedHexString.ToString(), actualHexString.ToString());
         }
+
+        [TestMethod]
+        public void Callenge6()
+        {
+            var expectedString = "";//Set1Data.Challenge6Solution;
+            var expectedKey = System.Text.Encoding.ASCII.GetBytes("Terminator X: Bring the noise");
+            var input = Set1Data.Challenge6Input.Replace("\r\n", string.Empty);
+            var encryptedData = Convert.FromBase64String(input);
+            var singleByteCracker = new SingleByteXorCracker(new BigramCalculator());
+            var cracker = new MultiByteXorCracker(singleByteCracker);
+
+            var actualKey = cracker.CrackKey(encryptedData);
+            var decryptedData = XorUtil.Xor(encryptedData, actualKey);
+            var actualString = System.Text.Encoding.ASCII.GetString(decryptedData);
+
+            Assert.AreEqual(expectedString, actualString);
+            Assert.AreEqual(expectedKey, actualKey);
+        }
     }
 }

@@ -40,9 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crypto\Xor\MultiByteXorCracker.cs" />
     <Compile Include="Crypto\Xor\SingleByteXorCracker.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Text\BigramCalculator.cs" />
+    <Compile Include="Text\HammingCalculator.cs" />
     <Compile Include="Text\HexString.cs" />
     <Compile Include="Text\ITextScoreCalculator.cs" />
     <Compile Include="Text\TextScore.cs" />
