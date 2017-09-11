@@ -128,5 +128,22 @@ namespace cryptopals.Test.Challenges
 
             Assert.AreEqual(Set1Data.Challenge7Solution, clearText);
         }
+
+        [TestMethod]
+        public void Challenge8()
+        {
+            var delim = new[] { "\n", "\r\n" };
+            var lines = Set1Data.Challenge8Input.Split(delim, StringSplitOptions.RemoveEmptyEntries);
+            int index = 0;
+            for (; index < lines.Length; index++)
+            {
+                var bytes = System.Text.Encoding.ASCII.GetBytes(lines[index]);
+                if (AesEcb.IsEcbEncrypted(bytes))
+                {
+                    break;
+                }
+            }
+            Assert.AreEqual(Set1Data.Challenge8Solution, index);
+        }
     }
 }

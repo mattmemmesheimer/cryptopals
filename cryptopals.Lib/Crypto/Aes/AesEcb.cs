@@ -1,5 +1,8 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
+using cryptopals.Lib.Extensions;
+using cryptopals.Lib.Text;
 
 namespace cryptopals.Lib.Crypto.Aes
 {
@@ -23,6 +26,22 @@ namespace cryptopals.Lib.Crypto.Aes
                 var decryptor = alg.CreateDecryptor();
                 return Transform(data, decryptor);
             }
+        }
+
+        public static bool IsEcbEncrypted(byte[] data, int blockSize = 16)
+        {
+            var blocks = data.Chunks(blockSize);
+            var blockList = new List<string>();
+            foreach (var block in blocks)
+            {
+                var hs = new HexString(block);
+                if (blockList.Contains(hs.ToString()))
+                {
+                    return true;
+                }
+                blockList.Add(hs.ToString());
+            }
+            return false;
         }
 
         private static SymmetricAlgorithm CreateAlgorithm()
