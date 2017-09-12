@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using cryptopals.Lib.Crypto.Aes;
 using cryptopals.Lib.Text;
@@ -9,6 +10,9 @@ namespace cryptopals.Test.Challenges
     [TestClass]
     public class Set2
     {
+        private static readonly int EcbCbcEncryptionOracleInputLengthBytes = 64;
+        private static readonly int Challenge11TestCount = 100;
+
         [TestMethod]
         public void TestChallenge10()
         {
@@ -21,6 +25,22 @@ namespace cryptopals.Test.Challenges
             var actual = System.Text.Encoding.ASCII.GetString(decrypted);
 
             Assert.AreEqual(Set2Data.Challenge10Solution, actual);
+        }
+
+        [TestMethod]
+        public void TestChallenge11()
+        {
+            var data = new List<byte>();
+            for (int i = 0; i < EcbCbcEncryptionOracleInputLengthBytes; i++)
+            {
+                data.Add(0x00);
+            }
+            for (int i = 0; i < Challenge11TestCount; i++)
+            {
+                var guessedMode =
+                    AesEcbCbcDetectionOracle.EncryptEcbOrCbc(data.ToArray(), out var actualMode);
+                Assert.AreEqual(actualMode, guessedMode);
+            }
         }
     }
 }
