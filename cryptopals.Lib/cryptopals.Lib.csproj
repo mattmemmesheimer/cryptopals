@@ -54,6 +54,7 @@
     <Compile Include="Text\HammingCalculator.cs" />
     <Compile Include="Text\HexString.cs" />
     <Compile Include="Text\ITextScoreCalculator.cs" />
+    <Compile Include="Text\KvpParser.cs" />
     <Compile Include="Text\TextScore.cs" />
     <Compile Include="XorUtil.cs" />
   </ItemGroup>

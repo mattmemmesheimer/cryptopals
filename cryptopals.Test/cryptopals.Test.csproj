@@ -57,6 +57,7 @@
     <Compile Include="Set2Data.cs" />
     <Compile Include="Text\HammingCalculatorTest.cs" />
     <Compile Include="Text\HexStringTest.cs" />
+    <Compile Include="Text\KvpParserTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
