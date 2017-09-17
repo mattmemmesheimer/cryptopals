@@ -56,5 +56,27 @@ namespace cryptopals.Test.Challenges
             var s = System.Text.Encoding.ASCII.GetString(decrypted);
             Assert.AreEqual(Set2Data.Challenge12Solution, s);
         }
+        [TestMethod]
+        public void TestChallenge13()
+        {
+            var email1 = "my@bar.comadmin";
+            var padding = 11;
+            var paddingBytes = new List<byte>();
+            for (int i = 0; i < padding; i++)
+            {
+                paddingBytes.Add((byte)padding);
+            }
+            var paddingStr = System.Text.Encoding.ASCII.GetString(paddingBytes.ToArray());
+            var x1 = CutAndPasteEcbDecryption.EncryptProfileFor(email1 + paddingStr);
+            var email2 = "aaaaa@bar.com";
+            var x2 = CutAndPasteEcbDecryption.EncryptProfileFor(email2);
+            var bytes = new List<byte>();
+            bytes.AddRange(x2.Take(32));
+            bytes.AddRange(x1.Skip(16).Take(16));
+            var profile = CutAndPasteEcbDecryption.DecryptProfile(bytes.ToArray());
+
+            Assert.IsTrue(profile.ContainsKey("role"));
+            Assert.AreEqual("admin", profile["role"]);
+        }
     }
 }
