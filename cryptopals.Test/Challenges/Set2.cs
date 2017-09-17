@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using cryptopals.Lib.Crypto;
 using cryptopals.Lib.Crypto.Aes;
 using cryptopals.Lib.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -30,6 +31,7 @@ namespace cryptopals.Test.Challenges
         [TestMethod]
         public void TestChallenge11()
         {
+            var key = SecureRng.GenerateRandomBytes(16);
             var data = new List<byte>();
             for (int i = 0; i < EcbCbcEncryptionOracleInputLengthBytes; i++)
             {
@@ -41,6 +43,18 @@ namespace cryptopals.Test.Challenges
                     AesEcbCbcDetectionOracle.EncryptEcbOrCbc(data.ToArray(), out var actualMode);
                 Assert.AreEqual(actualMode, guessedMode);
             }
+        }
+
+        [TestMethod]
+        public void TestChallenge12()
+        {
+            int blockSize = ByteAtATimeEcbDecryption.FindBlockSize();
+            Assert.AreEqual(Set2Data.Challenge12BlockSizeBytes, blockSize);
+            var ecbMode = ByteAtATimeEcbDecryption.ConfirmEcbMode(blockSize);
+            Assert.IsTrue(ecbMode);
+            var decrypted = ByteAtATimeEcbDecryption.Decrypt();
+            var s = System.Text.Encoding.ASCII.GetString(decrypted);
+            Assert.AreEqual(Set2Data.Challenge12Solution, s);
         }
     }
 }

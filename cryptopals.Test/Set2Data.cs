@@ -151,5 +151,17 @@ Play that funky music
 ";
 
         #endregion
+
+        #region Challenge 12
+
+        public static readonly int Challenge12BlockSizeBytes = 16;
+
+        public static readonly string Challenge12Solution = @"Rollin' in my 5.0
+With my rag-top down so my hair can blow
+The girlies on standby waving just to say hi
+Did you stop? No, I just drove by
+";
+
+        #endregion
     }
 }
