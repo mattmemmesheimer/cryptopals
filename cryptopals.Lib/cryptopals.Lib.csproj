@@ -49,7 +49,7 @@
     <Compile Include="Crypto\SecureRng.cs" />
     <Compile Include="Crypto\Xor\MultiByteXorCracker.cs" />
     <Compile Include="Crypto\Xor\SingleByteXorCracker.cs" />
-    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Text\BigramCalculator.cs" />
     <Compile Include="Text\HammingCalculator.cs" />

@@ -15,7 +15,7 @@ namespace cryptopals.Lib.Crypto.Aes
             int cipherTextLength = data.Length + paddingLength;
             var cipherText = new byte[cipherTextLength];
             var paddedData = PaddingUtil.Pad(data, BlockSizeBytes);
-            var blocks = paddedData.Batch(BlockSizeBytes);
+            var blocks = paddedData.Chunks(BlockSizeBytes);
             int index = 0;
             var previousBlock = iv;
             foreach (var block in blocks)
@@ -31,7 +31,7 @@ namespace cryptopals.Lib.Crypto.Aes
 
         public static byte[] Decrypt(byte[] key, byte[] iv, byte[] data)
         {
-            var blocks = data.Batch(BlockSizeBytes);
+            var blocks = data.Chunks(BlockSizeBytes);
             var clearText = new byte[data.Length];
             int index = 0;
             var previousBlock = iv;

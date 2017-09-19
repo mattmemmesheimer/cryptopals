@@ -41,7 +41,7 @@ namespace cryptopals.Lib.Crypto.Xor
             var results = new List<KeySizeDistance>();
             for (int keySizeGuess = MinKeySize; keySizeGuess <= MaxKeySize; keySizeGuess++)
             {
-                var blocks = data.Batch(keySizeGuess).ToArray();
+                var blocks = data.Chunks(keySizeGuess).ToArray();
                 var distances = new List<double>();
                 for (int block = 0; block < NumBlocksToAverage; block++)
                 {
