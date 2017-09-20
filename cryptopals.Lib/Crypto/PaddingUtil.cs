@@ -34,5 +34,27 @@ namespace cryptopals.Lib.Crypto
             Array.Copy(input, unpadded, length);
             return unpadded;
         }
+
+        public static bool ValidPadding(byte[] input, int blockSize)
+        {
+            if (input.Length == 0)
+            {
+                throw new ArgumentException("Array cannot be empty", nameof(input));
+            }
+            if (input.Length % blockSize != 0)
+            {
+                return false;
+            }
+            var paddingByte = input[input.Length - 1];
+            var paddingLength = (int) paddingByte;
+            for (int i = 0; i < paddingLength; i++)
+            {
+                if (input[input.Length - 1 - i] != paddingByte)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

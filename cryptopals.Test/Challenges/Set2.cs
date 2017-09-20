@@ -92,6 +92,23 @@ namespace cryptopals.Test.Challenges
             var s = System.Text.Encoding.ASCII.GetString(decrypted);
             Assert.AreEqual(Set2Data.Challenge12Solution, s);
         }
+        
+        [TestMethod]
+        public void TestChallenge15()
+        {
+            var blockSize = 16;
+            var str = "ICE ICE BABY";
+            var bytes = System.Text.Encoding.ASCII.GetBytes(str);
+            var valid = PaddingUtil.Pad(bytes, blockSize);
+            Assert.IsTrue(PaddingUtil.ValidPadding(valid, blockSize));
 
+            var invalid = new List<byte>(bytes);
+            invalid.AddRange(new byte[]{0x05, 0x05, 0x05, 0x05});
+            Assert.IsFalse(PaddingUtil.ValidPadding(invalid.ToArray(), blockSize));
+
+            invalid = new List<byte>(bytes);
+            invalid.AddRange(new byte[] { 0x01, 0x02, 0x03, 0x04 });
+            Assert.IsFalse(PaddingUtil.ValidPadding(invalid.ToArray(), blockSize));
+        }
     }
 }
