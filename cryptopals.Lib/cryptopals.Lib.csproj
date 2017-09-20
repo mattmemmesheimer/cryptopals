@@ -44,6 +44,7 @@
     <Compile Include="Crypto\Aes\AesEcb.cs" />
     <Compile Include="Crypto\Aes\AesEcbCbcDetectionOracle.cs" />
     <Compile Include="Crypto\Aes\ByteAtATimeEcbDecryption.cs" />
+    <Compile Include="Crypto\Aes\ByteAtATimeEcbDecryption2.cs" />
     <Compile Include="Crypto\Aes\CutAndPasteEcbDecryption.cs" />
     <Compile Include="Crypto\PaddingUtil.cs" />
     <Compile Include="Crypto\SecureRng.cs" />

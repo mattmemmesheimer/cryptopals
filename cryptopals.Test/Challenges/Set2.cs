@@ -56,6 +56,7 @@ namespace cryptopals.Test.Challenges
             var s = System.Text.Encoding.ASCII.GetString(decrypted);
             Assert.AreEqual(Set2Data.Challenge12Solution, s);
         }
+
         [TestMethod]
         public void TestChallenge13()
         {
@@ -78,5 +79,19 @@ namespace cryptopals.Test.Challenges
             Assert.IsTrue(profile.ContainsKey("role"));
             Assert.AreEqual("admin", profile["role"]);
         }
+
+        [TestMethod]
+        public void TestChallenge14()
+        {
+            int blockSize = ByteAtATimeEcbDecryption2.FindBlockSize();
+            Assert.AreEqual(Set2Data.Challenge12BlockSizeBytes, blockSize);
+
+            ByteAtATimeEcbDecryption2.Decrypt();
+
+            var decrypted = ByteAtATimeEcbDecryption2.Decrypt();
+            var s = System.Text.Encoding.ASCII.GetString(decrypted);
+            Assert.AreEqual(Set2Data.Challenge12Solution, s);
+        }
+
     }
 }
