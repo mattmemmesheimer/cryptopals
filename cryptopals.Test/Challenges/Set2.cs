@@ -110,5 +110,18 @@ namespace cryptopals.Test.Challenges
             invalid.AddRange(new byte[] { 0x01, 0x02, 0x03, 0x04 });
             Assert.IsFalse(PaddingUtil.ValidPadding(invalid.ToArray(), blockSize));
         }
+
+        [TestMethod]
+        public void TestMethod16()
+        {
+            var encrypted = AesCbcBitFlipping.EncryptionOracle(";admin=true;");
+            Assert.IsFalse(AesCbcBitFlipping.IsAdmin(encrypted));
+
+            encrypted = AesCbcBitFlipping.EncryptionOracle("AAAAAAAAAAAAAAAA:admin<true:AAAA");
+            encrypted[32] ^= 1;
+            encrypted[38] ^= 1;
+            encrypted[43] ^= 1;
+            Assert.IsTrue(AesCbcBitFlipping.IsAdmin(encrypted));
+        }
     }
 }
