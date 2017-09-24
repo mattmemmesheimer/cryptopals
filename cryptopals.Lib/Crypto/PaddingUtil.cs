@@ -46,6 +46,10 @@ namespace cryptopals.Lib.Crypto
                 return false;
             }
             var paddingByte = input[input.Length - 1];
+            if (paddingByte == 0)
+            {
+                return false;
+            }
             var paddingLength = (int) paddingByte;
             for (int i = 0; i < paddingLength; i++)
             {
