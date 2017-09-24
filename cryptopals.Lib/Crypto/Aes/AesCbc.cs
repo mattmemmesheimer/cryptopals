@@ -29,7 +29,7 @@ namespace cryptopals.Lib.Crypto.Aes
             return cipherText;
         }
 
-        public static byte[] Decrypt(byte[] key, byte[] iv, byte[] data)
+        public static byte[] Decrypt(byte[] key, byte[] iv, byte[] data, bool removePadding = true)
         {
             var blocks = data.Chunks(BlockSizeBytes);
             var clearText = new byte[data.Length];
@@ -44,7 +44,11 @@ namespace cryptopals.Lib.Crypto.Aes
                 previousBlock = blockArray;
                 index += BlockSizeBytes;
             }
-            return PaddingUtil.RemovePad(clearText);
+            if (removePadding)
+            {
+                return PaddingUtil.RemovePad(clearText);
+            }
+            return clearText;
         }
     }
 }
