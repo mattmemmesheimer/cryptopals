@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Crypto\Aes\AesCbc.cs" />
     <Compile Include="Crypto\Aes\AesCbcBitFlipping.cs" />
+    <Compile Include="Crypto\Aes\AesCtr.cs" />
     <Compile Include="Crypto\Aes\AesEcb.cs" />
     <Compile Include="Crypto\Aes\AesEcbCbcDetectionOracle.cs" />
     <Compile Include="Crypto\Aes\ByteAtATimeEcbDecryption.cs" />

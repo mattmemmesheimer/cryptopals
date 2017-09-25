@@ -15,5 +15,23 @@ namespace cryptopals.Test.Challenges
             
             CollectionAssert.AreEqual(expected, decrypted);
         }
+
+        [TestMethod]
+        public void TestChallenge18()
+        {
+            var encrypted = Convert.FromBase64String(Set3Data.Challenge18Input);
+            var keyStr = "YELLOW SUBMARINE";
+            var key = System.Text.Encoding.ASCII.GetBytes(keyStr);
+            ulong nonce = 0;
+
+            var decrypted = AesCtr.Decrypt(key, nonce, encrypted);
+            var actual = System.Text.Encoding.ASCII.GetString(decrypted);
+
+            Assert.AreEqual(Set3Data.Challenge18Solution, actual);
+
+            // Encrypt and verify against input data
+            var enc = AesCtr.Encrypt(key, nonce, decrypted);
+            CollectionAssert.AreEqual(encrypted, enc);
+        }
     }
 }
